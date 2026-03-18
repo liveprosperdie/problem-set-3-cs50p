@@ -1,20 +1,28 @@
+def main():
+    p=convert(input("Fraction: "))
+    s=gauge(p)
+    print (s)
 
-while True:
-    try:
-        frac = input("Fraction: ")
-        x,y= frac.split("/")
-        x,y=int(x),int(y)
-        if x>y or y==0:
-            continue
-    except ValueError,ZeroDivisionError:
-        pass
+
+def convert(frac):
+    x,y= frac.split("/")
+    x,y=int(x),int(y)
+    if y==0:
+        raise ZeroDivisionError
+    if x>y or x<0 or y<0:
+        raise ValueError
+    p=round((x/y)*100)
+    return p
+
+
+def gauge(percent):
+    if percent<=1:
+        return "E"
+    elif percent>=99:
+        return "F"
     else:
-        break
+        return f"{percent}%"
 
-percent=round((x/y)*100)
-if percent<=1:
-    print("E")
-elif percent>=99:
-    print("F")
-else:
-    print(f"{percent}%")
+
+if __name__=="__main__":
+    main()
